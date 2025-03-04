@@ -8,16 +8,7 @@ if (!isset($_GET['table'])) {
 $table = $_GET['table'];
 
 // Подключение к базе данных
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "komercheskaya firma";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Ошибка подключения: " . $conn->connect_error);
-}
+include "db.php";
 
 // Получение информации о таблице
 $result = $conn->query("DESCRIBE $table");
@@ -70,4 +61,3 @@ echo "<input type='submit' value='Добавить'>";
 echo "</form>";
 
 $conn->close();
-?>

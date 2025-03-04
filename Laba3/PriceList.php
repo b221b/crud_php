@@ -18,11 +18,10 @@
     include "fnck/executeQuery.php";
 
     // Функция для отображения данных из таблицы
-
-    //Клиенты
-    function displayDataClients()
+    //Прайс лист
+    function displayDataPriceList()
     {
-        $table = 'Clients';
+        $table = 'price_list';
         $sql = "SELECT * FROM $table";
         global $conn;
         $result = $conn->query($sql);
@@ -31,21 +30,19 @@
             echo "<table class='table'>";
 
             echo "<tr>";
-            echo "<th>ФИО</th>";
-            echo "<th>Номер договора</th>";
-            echo "<th>Дата покупки</th>";
-            echo "<th>Телефон</th>";
-            echo "<th>Адрес</th>";
+            echo "<th>Год выпуска</th>";
+            echo "<th>Цена</th>";
+            echo "<th>Предпродажная подготовка</th>";
+            echo "<th>Транспортные издержки</th>";
             echo "<th>Действия</th>";
             echo "</tr>";
 
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row["FIO"] . "</td>";
-                echo "<td>" . $row["dogovor_number"] . "</td>";
-                echo "<td>" . $row["buy_date"] . "</td>";
-                echo "<td>" . $row["phone"] . "</td>";
-                echo "<td>" . $row["address"] . "</td>";
+                echo "<td>" . $row["year_start"] . "</td>";
+                echo "<td>" . $row["coast"] . "</td>";
+                echo "<td>" . $row["podgotovka"] . "</td>";
+                echo "<td>" . $row["transport_coast"] . "</td>";
                 echo "<td><a href='edit.php?table=$table&id=" . $row["id"] . "'>Изменить</a> | <a href='delete.php?table=$table&id=" . $row["id"] . "'>Удалить</a> </td>";
                 echo "</tr>";
             }
@@ -56,17 +53,16 @@
         }
     }
 
-    // Отображение данных таблицы 'clients'
-    echo "<h2>Клиенты</h2>";
-    displayDataClients('clients');
+    // Отображение данных таблицы 'price_list'
+    echo "<h2>Прайс лист</h2>";
+    displayDataPriceList('price_list');
 
-    $table = 'clients';
+    $table = 'price_list';
     echo "<a href='create.php?table=$table' style='display: inline-block; width: 150px; height: 50px; background-color: #ccc; text-align: center; line-height: 50px; border-radius: 5px;'>Добавить запись</a>";
 
     $conn->close();
     ?>
-    
-    </form>
+
 </body>
 
 </html>
